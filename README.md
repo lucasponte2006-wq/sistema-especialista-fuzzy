@@ -71,7 +71,7 @@ cd sistema-especialista-fuzzy
 pip install -r requirements.txt
 
 # Execute a aplicação
-python -m streamlit run app.py
+python -m streamlit run app.py.py
 ```
 
 A aplicação abrirá automaticamente em: http://localhost:8501
