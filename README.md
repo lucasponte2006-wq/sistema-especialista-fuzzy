@@ -1,50 +1,85 @@
-# Sistema Especialista Fuzzy para Aprovação de Empréstimos
+# 💳 CréditoFuzzy — Sistema Especialista com Lógica Fuzzy
 
-Este projeto implementa um **Sistema Especialista utilizando Lógica Fuzzy** para simular a aprovação de empréstimos bancários.
+Sistema especialista para simulação de aprovação de empréstimos bancários, utilizando Lógica Fuzzy para tomada de decisão. Desenvolvido em Python com interface web interativa via Streamlit.
 
-A aplicação possui uma **interface web interativa** desenvolvida em Python utilizando Streamlit, permitindo que o usuário selecione valores de salário, montante do empréstimo e se possui conta no banco.
+---
 
-## Tecnologias Utilizadas
+## 🖥️ Interface
 
-- Python
+O usuário informa três variáveis de entrada:
+- **Valor do empréstimo** — de R$ 1.000 a R$ 50.000
+- **Salário mensal** — de R$ 700 a R$ 20.000
+- **Possui conta no banco** — Sim ou Não
+
+O sistema retorna a decisão (**Aprovado**, **Negado** ou **Inconclusivo**) com os motivos da recusa e um painel de diagnóstico com os graus de pertinência fuzzy calculados.
+
+---
+
+## 🛠️ Tecnologias
+
+- Python 3
 - Streamlit
-- Lógica Fuzzy
 
-## Regras do Sistema
+---
+
+## 📐 Variáveis Fuzzy
 
 ### Montante do Empréstimo
-- Baixo: 5.000 – 10.000
-- Médio: 10.000 – 20.000
-- Alto: acima de 20.000
+| Conjunto | Faixa |
+|----------|-------|
+| Baixo | até R$ 5.000 |
+| Médio | R$ 5.000 – R$ 10.000 |
+| Alto | acima de R$ 20.000 |
 
-### Salário
-- Baixo: 700 – 3.000
-- Alto: acima de 3.000
+### Salário Mensal
+| Conjunto | Faixa |
+|----------|-------|
+| Baixo | até R$ 1.499 |
+| Médio | R$ 2.500 – R$ 6.000 (pico em R$ 3.000) |
+| Alto | acima de R$ 5.000 (pleno a partir de R$ 8.000) |
 
-### Regras de decisão
+---
 
-1. Se o montante for **baixo → empréstimo aprovado**
-2. Se o montante for **médio e salário alto → aprovado**
-3. Se o montante for **alto e cliente possui conta → aprovado**
-4. Caso contrário → negado ou inconclusivo
+## 📋 Regras de Decisão
 
-## Como executar o projeto
-Clone o repositório:
+### Aprovação
+1. Montante **baixo** → aprovado
+2. Montante **médio** + salário **médio ou alto** → aprovado
+3. Montante **alto** + salário **alto** + conta → aprovado
+4. Montante **alto** + salário **médio-alto** + conta → aprovado
 
+### Negação
+1. Salário abaixo de R$ 1.499
+2. Comprometimento de renda acima de 40% por parcela (em 24 meses)
+3. Montante alto sem conta bancária
+4. Montante médio com salário baixo e sem conta
+5. Perfil crítico: salário muito baixo para o montante solicitado
+6. Salário médio com montante alto sem conta
+
+---
+
+## ▶️ Como executar
+
+```bash
+# Clone o repositório
 git clone https://github.com/lucasponte2006-wq/sistema-especialista-fuzzy.git
 
-Entre na pasta:
+# Entre na pasta
 cd sistema-especialista-fuzzy
 
-Instale as dependências:
+# Instale as dependências
 pip install -r requirements.txt
 
-Execute a aplicação:
-python -m streamlit run app.py.py
+# Execute a aplicação
+python -m streamlit run app.py
+```
 
-A aplicação abrirá no navegador:
-http://localhost:8501
+A aplicação abrirá automaticamente em: http://localhost:8501
 
-## Autor (Lucas Barros Ponte)
+---
 
-Projeto desenvolvido para estudo de **Sistemas Especialistas e Lógica Fuzzy**.
+## 👤 Autor
+
+**Lucas Barros Ponte**
+
+Projeto desenvolvido para estudo de Sistemas Especialistas e Lógica Fuzzy.
